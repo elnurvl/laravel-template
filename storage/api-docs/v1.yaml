@@ -1,0 +1,51 @@
+openapi: 3.0.3
+info:
+  title: Test API
+  version: '1.0'
+  description: Test API definition
+  contact:
+    name: Laravel
+    url: 'https://laravel.com'
+servers:
+  - url: 'https://local.laravel.com/api/v1'
+    description: Dev
+paths:
+  /users:
+    get:
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+      summary: List Users
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+  /users/{user}:
+    parameters:
+      - in: path
+        name: user
+        schema:
+          type: integer
+    get:
+      summary: Login
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+        422:
+          description: Validation Error
+        429:
+          description: Too Many Requests
+      description: Logs the user in and returns the access token
